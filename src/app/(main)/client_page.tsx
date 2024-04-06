@@ -63,6 +63,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import { UserButton } from "@clerk/clerk-react"
 import { cancelOrder, createOrder, getBooks, updateOrder } from "@/services/all-services"
 import { useRouter } from "next/navigation"
+import { useClerk } from "@clerk/clerk-react"
 
 let totalBooksGenerated = 0
 const MAX_BOOKS = 20
@@ -79,6 +80,7 @@ function ClientPage({ books, booksV2 }: ClientPageProps): JSX.Element {
   const [hasMore, setHasMore] = useState(true)
   const [selectedTag, setSelectedTag] = useState("")
   const router = useRouter()
+  const { signOut } = useClerk()
   const [isDisabled, setIsDisabled] = useState(false)
 
   const fetchMoreData = async () => {
@@ -249,7 +251,8 @@ function ClientPage({ books, booksV2 }: ClientPageProps): JSX.Element {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu> */}
-          <UserButton />
+          {/* <UserButton /> */}
+          <Button onClick={() => signOut(() => router.push("/sign-in"))}>Sign Out</Button>
         </header>
         <main className="p-4">
           <div className="flex justify-between gap-4 mb-6">
