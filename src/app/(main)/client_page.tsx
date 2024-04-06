@@ -137,6 +137,11 @@ function ClientPage({ books, booksV2 }: ClientPageProps): JSX.Element {
   )
 
   const allTags = Array.from(new Set(initialBooks.flatMap((book) => book.tags)))
+
+  const handleSignOut = () => {
+    // You can add any additional logic you need here
+    signOut(() => router.push("/sign-in"))
+  }
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <TooltipProvider>
@@ -252,7 +257,9 @@ function ClientPage({ books, booksV2 }: ClientPageProps): JSX.Element {
             </DropdownMenuContent>
           </DropdownMenu> */}
           {/* <UserButton /> */}
-          <Button onClick={() => signOut(() => router.push("/sign-in"))}>Sign Out</Button>
+          <Button onClick={handleSignOut} disabled={isDisabled}>
+            Sign Out
+          </Button>
         </header>
         <main className="p-4">
           <div className="flex justify-between gap-4 mb-6">
